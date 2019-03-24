@@ -14,12 +14,12 @@ class PlayerInteraction {
   // Returns an {Observable} that will `onNext` for each player that joins and
   // `onCompleted` when time expires or the max number of players join.
   static pollPotentialPlayers(messages, channel, scheduler=rx.Scheduler.timeout, timeout=30, maxPlayers=10) {
-    let formatMessage = t => `Who wants to play? Respond with 'yes' in this channel in the next ${t} seconds.`;
+    let formatMessage = t => `<!here> Who wants to play? Respond with 'ok' in this channel in the next ${t} seconds.`;
     let timeExpired = PlayerInteraction.postMessageWithTimeout(channel, formatMessage, scheduler, timeout);
 
-    // Look for messages containing the word 'yes' and map them to a unique
+    // Look for messages containing the word 'ok' and map them to a unique
     // user ID, constrained to `maxPlayers` number of players.
-    let newPlayers = messages.where(e => e.text && e.text.toLowerCase().match(/\byes\b/))
+    let newPlayers = messages.where(e => e.text && e.text.toLowerCase().match(/\bok\b/))
       .map(e => e.user)
       .distinct()
       .take(maxPlayers)
@@ -114,7 +114,7 @@ class PlayerInteraction {
   //
   // Returns the formatted string
   static buildActionMessage(player, availableActions, timeRemaining) {
-    let message = `${player.name}, it's your turn. Respond with:\n`;
+    let message = `<!${player.name}>, it's your turn. Respond with:\n`;
     for (let action of availableActions) {
       message += `*(${action.charAt(0).toUpperCase()})${action.slice(1)}*\t`;
     }
