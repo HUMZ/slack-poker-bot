@@ -31,7 +31,7 @@ Click this button:
 
 ## Directions
 * To start a game, `@<your-bot-name>: deal`.
-* To end a game, `@<your-bot-name>: quit game`. The game will end once the current hand finishes.
+* To end a game, `@<your-bot-name>: quit`. The game will end once the current hand finishes.
 Note that any player can end a game at any time with this command, so Be Honorable™.
 * To configure some bot options, `@<your-bot-name>: config <name-of-option>=<value>`. The supported options are:
 ```

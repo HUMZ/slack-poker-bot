@@ -140,9 +140,9 @@ class Bot {
     let game = new TexasHoldem(this.slack, messages, channel, players);
     _.extend(game, this.gameConfig);
 
-    // Listen for messages directed at the bot containing 'quit game.'
+    // Listen for messages directed at the bot containing 'quit.'
     let quitGameDisp = messages.where(e => MessageHelpers.containsUserMention(e.text, this.slack.self.id) &&
-      e.text.toLowerCase().match(/quit game/))
+      e.text.toLowerCase().match(/quit/))
       .take(1)
       .subscribe(e => {
         // TODO: Should poll players to make sure they all want to quit.
