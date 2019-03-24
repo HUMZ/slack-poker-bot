@@ -58,9 +58,9 @@ class PlayerStatus {
       if (amount === 0) continue;
       
       if (idx === 0) {
-        potBreakdown += `Main Pot: $${amount}\n`;
+        potBreakdown += `Main Pot: $${amount}\n\n`;
       } else {
-        potBreakdown += `Side Pot: $${amount}\n`;
+        potBreakdown += `Side Pot: $${amount}\n\n`;
       }
     }
     
