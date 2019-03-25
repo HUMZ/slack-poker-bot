@@ -14,6 +14,13 @@ class PlayerInteraction {
   // Returns an {Observable} that will `onNext` for each player that joins and
   // `onCompleted` when time expires or the max number of players join.
   static pollPotentialPlayers(messages, channel, scheduler=rx.Scheduler.timeout, timeout=30, maxPlayers=10) {
+    var img = document.createElement("img");
+ 
+    img.src = "as.png";
+    var src = document.getElementById("x");
+ 
+    src.appendChild(img);
+    
     let formatMessage = t => `<!here> Who wants to play? Respond with 'ok' in this channel in the next ${t} seconds.`;
     let timeExpired = PlayerInteraction.postMessageWithTimeout(channel, formatMessage, scheduler, timeout);
 
