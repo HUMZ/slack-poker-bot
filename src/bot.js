@@ -129,7 +129,7 @@ class Bot {
   //
   // Returns an {Observable} that signals completion of the game 
   startGame(messages, channel, players) {
-    if (players.length = 0) {
+    if (players.length == 0) {
       channel.send('Not enough human players. At least 1 human is required.');
       return rx.Observable.return(null);
     }
@@ -140,7 +140,7 @@ class Bot {
         // let bot1 = new WeakBot('Bee Bot');
         // players.push(bot1);
          
-         let bot2 = new AggroBot('Bo Bot');
+         let bot2 = new AggroBot('Adverse Event');
          players.push(bot2);
        
     } 
