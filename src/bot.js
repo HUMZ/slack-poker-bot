@@ -130,8 +130,14 @@ class Bot {
   // Returns an {Observable} that signals completion of the game 
   startGame(messages, channel, players) {
     if (players.length <= 1) {
-      channel.send('Not enough players for a game, try again later.');
-      return rx.Observable.return(null);
+      channel.send('Not enough human players.  Adding an AI player to join you. Type @poker quit to end game.');
+      addBotPlayers(players) {
+        // let bot1 = new WeakBot('Bee Bot');
+        // players.push(bot1);
+         
+         let bot2 = new AggroBot('Bo Bot');
+         players.push(bot2);
+       }
     }
 
     channel.send(`We've got ${players.length} players, let's start the game.`);
@@ -165,13 +171,7 @@ class Bot {
   // players - The players participating in the game
 
   
-  addBotPlayers(players) {
-   // let bot1 = new WeakBot('Bee Bot');
-   // players.push(bot1);
-    
-    let bot2 = new AggroBot('Bo Bot');
-    players.push(bot2);
-  }
+
 
   // Private: Save which channels and groups this bot is in and log them.
   onClientOpened() {
