@@ -95,17 +95,27 @@ class Bot {
       });
   }
   
-  handleBotMessages(atMentions) {
+  handleDealGameMessagesAI(messages, atMentions) {
     return atMentions
-      .where(e => e.text && e.text.toLowerCase().includes('ai'))
-      .subscribe(e => {
+      .where(e => e.text && e.text.toLowerCase().match(/\bai\b/))
+      .map(e => this.slack.getChannelGroupOrDMByID(e.channel))
+      .where(channel => {
+        if (this.isPolling) {
+          return false;
+        } else if (this.isGameRunning) {
+          channel.send('Another game is in progress, quit that first.');
+          return false;
+        }
         let bot1 = new WeakBot('Bee Bot');
         players.push(bot1);
         
         let bot2 = new AggroBot('Bo Bot');
         players.push(bot2);
-      });
-  }
+        return true;
+      })
+      .flatMap(channel => this.pollPlayersForGame(messages, channel))
+      .subscribe();
+
 
   // Private: Polls players to join the game, and if we have enough, starts an
   // instance.
