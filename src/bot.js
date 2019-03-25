@@ -166,8 +166,8 @@ class Bot {
 
   
   addBotPlayers(players) {
-    let bot1 = new WeakBot('Bee Bot');
-    players.push(bot1);
+   // let bot1 = new WeakBot('Bee Bot');
+   // players.push(bot1);
     
     let bot2 = new AggroBot('Bo Bot');
     players.push(bot2);
