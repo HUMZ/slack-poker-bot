@@ -73,6 +73,7 @@ class Bot {
       .subscribe();
   }
   
+  
   // Private: Looks for messages directed at the bot that contain the word
   // "config" and have valid parameters. When found, set the parameter.
   //
@@ -94,6 +95,18 @@ class Bot {
       });
   }
   
+  handleBotMessages(atMentions) {
+    return atMentions
+      .where(e => e.text && e.text.toLowerCase().includes('ai'))
+      .subscribe(e => {
+        let bot1 = new WeakBot('Bee Bot');
+        players.push(bot1);
+        
+        let bot2 = new AggroBot('Bo Bot');
+        players.push(bot2);
+      });
+  }
+
   // Private: Polls players to join the game, and if we have enough, starts an
   // instance.
   //
@@ -163,13 +176,13 @@ class Bot {
   // Private: Adds AI-based players (primarily for testing purposes).
   //
   // players - The players participating in the game
-  addBotPlayers(players) {
-    let bot1 = new WeakBot('Bee Bot');
-    players.push(bot1);
+ // addBotPlayers(players) {
+ //   let bot1 = new WeakBot('Bee Bot');
+ //   players.push(bot1);
     
-    let bot2 = new AggroBot('Bo Bot');
-    players.push(bot2);
-  }
+ //   let bot2 = new AggroBot('Bo Bot');
+ //   players.push(bot2);
+ // }
 
   // Private: Save which channels and groups this bot is in and log them.
   onClientOpened() {
